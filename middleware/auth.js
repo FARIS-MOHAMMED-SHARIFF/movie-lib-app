@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
 			.status(400)
 			.send({ message: "Access denied, no token provided." });
 
-	jwt.verify(token, process.env.JWTPRIVATEKEY, (err, validToken) => {
+	jwt.verify(token, process.env.SECRET_KEY, (err, validToken) => {
 		if (err) {
 			return res.status(400).send({ message: "invalid token" });
 		} else {
