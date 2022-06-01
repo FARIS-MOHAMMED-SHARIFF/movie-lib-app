@@ -19,11 +19,14 @@ app.use(express.json())
 app.use(cors());
 
 //Added
-app.use("/", authRoutes);
 app.use("/user/", userRoutes);
 app.use("/login/", authRoutes);
 app.use("/playlists/", playListRoutes);
 
+app.get("/", (req , res) => {
+    {
+        res.send("Hello");
+};
 
 const port = process.env.PORT || 8080;
 
