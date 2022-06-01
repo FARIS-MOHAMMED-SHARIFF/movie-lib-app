@@ -14,6 +14,7 @@ const playListRoutes = require('./routes/playList');
 connection();
 
 //middleware
+app.use(express.static(__dirname));
 app.use(express.json())
 app.use(cors());
 
