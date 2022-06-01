@@ -18,7 +18,8 @@ app.use(express.static(__dirname));
 app.use(express.json())
 app.use(cors());
 
-
+//Added
+app.use("/", authRoutes);
 app.use("/user/", userRoutes);
 app.use("/login/", authRoutes);
 app.use("/playlists/", playListRoutes);
