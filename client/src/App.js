@@ -14,8 +14,8 @@ const App = () => {
     <>
 	{loggedIn && <Navbar />}
     <Routes>
-			<Route path="/" element={<Navigate replace to="/login" />} />
 			{loggedIn && <Route path="/" exact element={<Main />} />}
+			<Route path="/" element={<Navigate replace to="/login" />} />
 			<Route path="/signup" exact element={<Signup />} />
 			<Route path="/login" exact element={<Login />} />
 			<Route exact path="/"  element = {<Home />} />
