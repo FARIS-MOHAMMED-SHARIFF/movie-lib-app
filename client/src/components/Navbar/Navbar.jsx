@@ -1,17 +1,15 @@
 import React  from 'react';
-import { NavLink , useNavigate} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import './Navbar.css'
 
 
 const Navbar = ( props ) => {
 
-    // const history = useHistory
-    const nav = useNavigate(); 
     const handleLogout = () => {
 		localStorage.removeItem("token");
-    nav("/login");
+    // nav("/login");
 		// window.location.reload();
-    // props.history.push("/");
+    window.location.replace("/login"); 
 	};
   return (
     <div className="navbar">
