@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import Navbar from '../Navbar/Navbar.jsx';
 import DisplayList from './DisplayList.js';
 import "./Playlist.css"
 
@@ -25,6 +26,8 @@ const Playlist = () => {
 		})    
   }, []); 
   return (
+	  <div>
+		  <Navbar />
 	  <div className="container">
 		  	<div className='cen_btn'>
 				<button className="playlist_btn">
@@ -39,6 +42,7 @@ const Playlist = () => {
 				</div>
 			</div>
 		</div>
+						</div>
   )
 }
 

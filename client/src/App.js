@@ -12,15 +12,17 @@ const App = () => {
   const loggedIn = localStorage.getItem("token");
   return (
     <>
-	{loggedIn && <Navbar />}
+	{/* {loggedIn && <Navbar />} */}
     <Routes>
 			{loggedIn && <Route path="/" exact element={<Main />} />}
-			<Route path="/" element={<Navigate replace to="/login" />} />
 			<Route path="/signup" exact element={<Signup />} />
 			<Route path="/login" exact element={<Login />} />
-			<Route exact path="/"  element = {<Home />} />
-			<Route path="/search" element = {<Search />} />
-            <Route path="/playlist" element = {<Playlist />} />
+			<Route path="/" element={<Navigate replace to="/login" />} />
+			{loggedIn && <Route exact path="/"  element = {<Home />} /> }
+			{loggedIn && <Route path="/search" element = {<Search />} /> }
+			<Route path="/search" element={<Navigate replace to="/login" />} />
+            {loggedIn && <Route path="/playlist" element = {<Playlist />} /> }
+			<Route path="/playlist" element={<Navigate replace to="/login" />} />
 	</Routes>
     </>
 	);

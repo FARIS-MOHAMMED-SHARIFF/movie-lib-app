@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Movie from '../Movie/Movie';
+import Navbar from '../Navbar/Navbar';
 import './Search.css'
 // const imageUrl = "https://image.tmdb.org/t/p/original/"
 const API_URL="https://api.themoviedb.org/3/movie/popular?api_key=094a3d803bdc4b5dd9242156577eda89";
@@ -40,6 +41,7 @@ const Search = () => {
     setQuery(e.target.value);
   }
   return (
+    <><Navbar />
     <div class="container"> 
         <header>
           <form onSubmit={searchMovie}>
@@ -55,6 +57,7 @@ const Search = () => {
               movies.map((movie) => <Movie key={movie.id} {...movie} />)}
         </div>
     </div>
+    </>
   )
 }
 
