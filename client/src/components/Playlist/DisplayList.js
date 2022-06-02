@@ -30,9 +30,9 @@ function DisplayList({ title , fetchUrl, isLargeRow }) {
                 <img 
                 key={movie}
                 // onClick={()=> handleClick(movie)}
-                className={`row__poster  ${isLargeRow && "row__posterLarge"} `}
+                className={"row__poster"}
                 src = {`https://image.tmdb.org/t/p/original/${movie.poster_paths}`}
-                alt={movie.name} 
+                alt={movie.title} 
                 />
               ))}
             </div>

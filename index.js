@@ -17,7 +17,10 @@ connection();
 // app.use(express.static(__dirname));
 app.use(express.json())
 app.use(cors());
-
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    next();
+  });
 //Added
 app.use("/user/", userRoutes);
 app.use("/login/", authRoutes);
