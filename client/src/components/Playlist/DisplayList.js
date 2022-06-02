@@ -13,7 +13,7 @@ function DisplayList({ title , fetchUrl, isLargeRow }) {
   useEffect(() => {
     async function fetchData(){
      const request = await axios.get(fetchUrl, config);
-     setMovies(request.data.movies);
+     setMovies(request.data.movies[0]);
     //  return request;
     } fetchData();
     
