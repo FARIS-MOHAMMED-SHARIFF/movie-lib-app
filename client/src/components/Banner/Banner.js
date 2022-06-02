@@ -21,39 +21,17 @@ function Banner() {
    function truncate(str ,n) {
       return str?.length > n ? str.substr(0, n - 1) + "..." : str;  };
 
-    //   const handleClick = (movie) => {
-        
-    //     if(trailerurl){
-    //       setTrailerurl("");
-    //     }else{
-    //       movieTrailer(movie?.name || "")
-    //       .then(url => {
-    //         const urlParams = new URLSearchParams( new URL(url).search);
-    //         setTrailerurl(urlParams.get('v'));
-   
-    //       }).catch(error => console.log(error))
-    //     }
-    //       };
 
-    //       const opts = {
-    //         height: "390",
-    //         width: "100%",
-    //         playerVars: {
-    //           autoplay:1,
-    //         },
-    //       }
   
     return (
       <div>
        <header className="banner"
-    //    onClick={() => setTrailerurl("")}
        style={{
            backgroundSize : "cover",
            backgroundImage: `url(
                "https://image.tmdb.org/t/p/original/${movie?.backdrop_path}"
            )`,
            backgroundPosition : "center top",
-          // backgroundPosition: " top bottom"
        }}
        >
 

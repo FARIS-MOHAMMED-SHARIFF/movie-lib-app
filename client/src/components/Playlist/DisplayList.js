@@ -5,7 +5,7 @@ import axios from "axios";
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
 
-function DisplayList({ title , fetchUrl, isLargeRow }) {
+function DisplayList({ title , url, isLargeRow }) {
   const [movies, setMovies] = useState([]);
   
   const config = {
@@ -13,7 +13,7 @@ function DisplayList({ title , fetchUrl, isLargeRow }) {
 };
   useEffect(() => {
     async function fetchData(){
-     const request = await axios.get(fetchUrl, config);
+     const request = await axios.get(url, config);
      setMovies(request.data);
     //  return request;
     } fetchData();
