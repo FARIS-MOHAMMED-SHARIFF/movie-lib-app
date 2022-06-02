@@ -14,7 +14,7 @@ const playListRoutes = require('./routes/playList');
 connection();
 
 //middleware
-app.use(express.static(__dirname));
+// app.use(express.static(__dirname));
 app.use(express.json())
 app.use(cors());
 
@@ -23,17 +23,14 @@ app.use("/user/", userRoutes);
 app.use("/login/", authRoutes);
 app.use("/playlists/", playListRoutes);
 
-app.get("/", (req , res) => {
-    {
-        res.send("Hello");
-};
 
 const port = process.env.PORT || 8080;
 
-__dirname = path.resolve();
+
 if(process.env.NODE_ENV == "production"){
-    app.use(express.static(path.join()));
+    app.use(express.static(path.join(__dirname,"client","build")));
+
 }
 
-app.listen(port, () => console.log("Listening on port ${ port } ..."))
+app.listen(port);
 
