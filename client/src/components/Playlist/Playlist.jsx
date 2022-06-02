@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import DisplayList from './DisplayList';
 // import DisplayList from './DisplayList';
 
-const fetchUrl = "/playlists/"
+const fetchUrl = "/playlists"
 
 const Playlist = () => {
 	
@@ -18,8 +18,9 @@ const Playlist = () => {
 		axios.get(fetchUrl, config)
 		.then(res => {
 			console.log(res.data)
-			console.log(res.data.name)
+			// console.log(res.data.name)
 			setPlaylist(res.data)
+			// console.log(playlists)
 		})
 		.catch(err => {
 			console.log(err)
@@ -39,7 +40,7 @@ const Playlist = () => {
 		<div className="row" >
 			<div>
 			{playlists.map( playlist => (
-				<DisplayList title={playlist.name}   fetchUrl="/playlists/:id={playlist._id}"/>
+				<DisplayList title={playlist.name}   fetchUrl={`/playlists/${playlist._id}`} />
 			))}
 			</div>
 		</div>

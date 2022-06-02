@@ -102,7 +102,7 @@ router.put("/remove-movie", auth, async (req, res) => {
 router.get("/", auth, async (req, res) => {
 	// const playlists = await PlayList.find();
 	const playlists = await PlayList.find({$or:[{ user: req.user._id },{ isprivate: "false"}]});
-	res.status(200).send({ data: playlists });
+	res.status(200).send( playlists );
 });
 
 // delete playlist by id

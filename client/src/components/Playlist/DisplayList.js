@@ -13,20 +13,11 @@ function DisplayList({ title , fetchUrl, isLargeRow }) {
   useEffect(() => {
     async function fetchData(){
      const request = await axios.get(fetchUrl, config);
-     setMovies(request.data.movies[0]);
+     setMovies(request.data);
     //  return request;
     } fetchData();
     
   }, []);
- 
-//   .then(res => {
-//     console.log(res.data.results)
-//     setPlaylist(res.data)
-// })
-// .catch(err => {
-//     console.log(err)
-// })    
-// }, []); 
 
     return (
         <div className="row" >
@@ -35,12 +26,12 @@ function DisplayList({ title , fetchUrl, isLargeRow }) {
 
             <div className="row__posters" >
 
-              {movies?.map(movie =>(
+              {movies.data?.map(movie =>(
                 <img 
                 key={movie}
                 // onClick={()=> handleClick(movie)}
                 className={`row__poster  ${isLargeRow && "row__posterLarge"} `}
-                src={`${baseUrl}${isLargeRow ? movie?.poster_paths : movie?.backdrop_path}`}
+                src={`${baseUrl}${movie.poster_paths}`}
                 alt={movie.name} 
                 />
               ))}
