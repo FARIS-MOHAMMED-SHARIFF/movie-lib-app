@@ -8,7 +8,7 @@ const Movie = ({title,poster_path,overview}) => {
   
   const handleAdd = async (e) => {
           e.preventDefault();      
-        	const response = await fetch('http://localhost:8080/playlists/add-movie', {
+        	const response = await fetch('/playlists/add-movie', {
         		method: 'PUT',
         		headers: {
         			'Content-Type': 'application/json',

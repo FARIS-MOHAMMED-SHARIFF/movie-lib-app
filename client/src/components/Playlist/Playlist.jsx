@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Row from '../Row/Row';
 // import DisplayList from './DisplayList';
 
-const fetchUrl = "http://localhost:8080/playlists/"
+const fetchUrl = "/playlists/"
 
 const Playlist = () => {
 	
@@ -37,7 +37,7 @@ const Playlist = () => {
 		<div className="row" >
 			<div>
 			{playlists.map( playlist => (
-				<Row title={playlist.name}   fetchUrl="http://localhost:8080/playlists/:id={playlist._id}"/>
+				<Row title={playlist.name}   fetchUrl="/playlists/:id={playlist._id}"/>
 			))}
 			</div>
 		</div>
@@ -51,7 +51,7 @@ export default Playlist
 // async function displayPlaylists(event) {
 	// 	event.preventDefault()
 
-	// 	const response = await fetch('http://localhost:8080/playlist/', {
+	// 	const response = await fetch('/playlist/', {
 	// 		method: 'GET',
 	// 		headers: {
 	// 			'Content-Type': 'application/js
