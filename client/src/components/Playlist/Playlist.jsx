@@ -1,8 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-// import Row from '../Row/Row';
 import DisplayList from './DisplayList';
-// import DisplayList from './DisplayList';
 
 const fetchUrl = "/playlists"
 
@@ -50,4 +48,3 @@ const Playlist = () => {
 
 export default Playlist
 
-// fetchUrl="https://api.themoviedb.org/3/movie/{movie_id}?api_key=094a3d803bdc4b5dd9242156577eda89&language=en-US"
