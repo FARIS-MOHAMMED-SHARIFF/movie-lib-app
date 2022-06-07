@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./DisplayList.css";
 import UpdateModal from "../UpdateModal";
+import "../Playlist/Playlist.css";
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
 
@@ -55,9 +56,19 @@ function DisplayList({ title, id, url, playlists, setPlaylist, isprivate }) {
   };
   return (
     <div className="row">
-      <h2>{title}</h2>
-      <button onClick={() => setModalIsOpen(true)}>Update</button>
-      <button onClick={handleDeletePlaylist}>Delete</button>
+      <div className="playlist_bar">
+        <div>
+          <h2>{title}</h2>
+        </div>
+        <div>
+          <button onClick={() => setModalIsOpen(true)} className="playlist_btn">
+            Update
+          </button>
+          <button onClick={handleDeletePlaylist} className="playlist_btn">
+            Delete
+          </button>
+        </div>
+      </div>
       {modalIsOpen ? (
         <UpdateModal
           modalIsOpen={modalIsOpen}

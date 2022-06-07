@@ -43,3 +43,9 @@
 .movie:hover{
     transform: scale(1.08);
    }
+
+.playlist_bar{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}

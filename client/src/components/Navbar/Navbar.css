@@ -27,15 +27,29 @@
     padding: .5vw;
     color: white;
 }
-.white_btn {
+
+.link:hover{
+    color: #e50914;
+    /* background-color: #e50914; */
+    transition: all 0.2s;
+}
+.button {
 	border: none;
-	outline: none;
-	padding: 12px 0;
-	background-color: white;
-	border-radius: 20px;
-	width: 120px;
-	font-weight: bold;
-	font-size: 14px;
+	outline: inherit;
+    font: inherit;
+    padding: .5vw;
+    background: none;
 	cursor: pointer;
 	margin-right: 20px;
+    color: white;
+}
+
+.button:hover{
+    color: #e50914;
+    transition: all 0.2s;
+}
+.app_name{
+    color:#e50914;
+    font-size: larger;
+    font-weight: 800;
 }

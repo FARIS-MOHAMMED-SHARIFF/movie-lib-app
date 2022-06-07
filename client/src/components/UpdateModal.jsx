@@ -3,6 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import Switch from "./Switch/Switch";
+import "./Playlist/Playlist.css"
 
 const customStyles = {
   content: {
@@ -68,13 +69,15 @@ const UpdateModal = ({
           required
           className="input"
         />
+        <span>Private:</span>
         <Switch
           isToggled={isToggled}
           onToggle={() => {
             setIsToggled(!isToggled);
           }}
         />
-        <button type="submit" className="white_btn">
+        <br />
+        <button type="submit" className="playlist_btn">
           Add
         </button>
       </form>

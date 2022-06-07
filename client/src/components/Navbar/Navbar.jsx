@@ -6,12 +6,11 @@ const Navbar = (props) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     // nav("/login");
-    // window.location.reload();
     window.location.replace("/login");
   };
   return (
     <div className="navbar">
-      <div>Movie Library</div>
+      <div className="app_name">Movie Library</div>
       <div className="items">
         <NavLink className="link" exact activeClassName="active_class" to="/">
           Home
@@ -32,7 +31,7 @@ const Navbar = (props) => {
         >
           Playlist
         </NavLink>
-        <button onClick={handleLogout}>Logout</button>
+        <button className="button" onClick={handleLogout}>Logout</button>
       </div>
     </div>
   );

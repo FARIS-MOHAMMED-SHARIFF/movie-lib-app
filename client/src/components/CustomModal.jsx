@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
+import "./Playlist/Playlist.css"
 
 const CustomModal = ({ modalIsOpen, setModalIsOpen, movieDetails }) => {
   const customStyles = {
@@ -62,8 +63,9 @@ const CustomModal = ({ modalIsOpen, setModalIsOpen, movieDetails }) => {
       style={customStyles}
     >
       <form className="form_container" onSubmit={handleAddToPlaylist}>
-        <h1>Select Playlist</h1>
-        <select onChange={handleChange}>
+        <h1>Add to Playlist</h1>
+        <label for="lists">Select playlist:</label>
+        <select id="lists" onChange={handleChange}>
           <option hidden disabled selected value>
             select
           </option>
@@ -71,9 +73,11 @@ const CustomModal = ({ modalIsOpen, setModalIsOpen, movieDetails }) => {
             <option value={list._id}>{list.name} </option>
           ))}
         </select>
-        <button type="submit" className="white_btn">
+        <p>
+        <button type="submit" className="playlist_btn">
           Add
         </button>
+        </p>
       </form>
     </Modal>
   );

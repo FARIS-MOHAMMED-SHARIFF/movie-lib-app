@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar.jsx";
-import DisplayList from "./DisplayList.js";
+import DisplayList from "./DisplayList.jsx";
 import "./Playlist.css";
 import Modal from "react-modal";
-import Switch from "../Switch/Switch.js";
+import Switch from "../Switch/Switch.jsx";
 
 Modal.setAppElement("#root");
 const fetchUrl = "/playlists";
@@ -107,6 +107,7 @@ const Playlist = ({ location, history }) => {
                 required
                 className="input"
               />
+              <span>Private:</span>
               <Switch
                 isToggled={isToggled}
                 onToggle={() => {
@@ -115,7 +116,8 @@ const Playlist = ({ location, history }) => {
               />
 
               {error && <div className="error_msg">{error}</div>}
-              <button type="submit" className="white_btn">
+              <br />
+              <button type="submit" className="playlist_btn">
                 Create
               </button>
             </form>
