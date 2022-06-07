@@ -133,6 +133,7 @@ const Playlist = ({ location, history }) => {
                 playlists={playlists}
                 setPlaylist={setPlaylist}
                 isprivate={playlist.isprivate}
+                user={playlist.user}
               />
             ))}
           </div>

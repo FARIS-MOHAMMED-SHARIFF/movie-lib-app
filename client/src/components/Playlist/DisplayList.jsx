@@ -5,8 +5,9 @@ import UpdateModal from "../UpdateModal";
 import "../Playlist/Playlist.css";
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
+const userid = localStorage.getItem("loggedUser");
 
-function DisplayList({ title, id, url, playlists, setPlaylist, isprivate }) {
+function DisplayList({ title, id, url, playlists, setPlaylist, isprivate, user }) {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -61,12 +62,12 @@ function DisplayList({ title, id, url, playlists, setPlaylist, isprivate }) {
           <h2>{title}</h2>
         </div>
         <div>
-          <button onClick={() => setModalIsOpen(true)} className="playlist_btn">
+          {userid === user && <button onClick={() => setModalIsOpen(true)} className="playlist_btn">
             Update
-          </button>
-          <button onClick={handleDeletePlaylist} className="playlist_btn">
+          </button>}
+          {userid === user && <button onClick={handleDeletePlaylist} className="playlist_btn">
             Delete
-          </button>
+          </button>}
         </div>
       </div>
       {modalIsOpen ? (
@@ -91,13 +92,13 @@ function DisplayList({ title, id, url, playlists, setPlaylist, isprivate }) {
             />
             <div className="movie-info">
               <h4>{movie.title}</h4>
-              <button
+              {userid === user && <button
                 onClick={() => {
                   handleDelete(movie.movie_id);
                 }}
               >
                 Delete
-              </button>
+              </button>}
             </div>
           </div>
         ))}

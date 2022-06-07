@@ -17,6 +17,7 @@ const Login = () => {
       const url = "/login";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
+      localStorage.setItem("loggedUser", res.userData);
       window.location = "/";
     } catch (error) {
       if (

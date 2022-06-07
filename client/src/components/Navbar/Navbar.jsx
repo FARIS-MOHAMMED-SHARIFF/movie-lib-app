@@ -5,6 +5,7 @@ import "./Navbar.css";
 const Navbar = (props) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("loggedUser");
     // nav("/login");
     window.location.replace("/login");
   };
