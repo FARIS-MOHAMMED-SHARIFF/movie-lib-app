@@ -47,6 +47,7 @@ const UpdateModal = ({
       .catch((res) => {
         alert("Unauthorised action");
       });
+      window.location.reload();
   };
 
   const handleChange = (e) => {
@@ -78,7 +79,7 @@ const UpdateModal = ({
         />
         <br />
         <button type="submit" className="playlist_btn">
-          Add
+          Update
         </button>
       </form>
     </Modal>
