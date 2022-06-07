@@ -5,7 +5,7 @@ const Joi = require("joi");
 
 const playListSchema = new mongoose.Schema({
 	name: { type: String, required: true },
-	user: { type: String, ref: "user", required: true },
+	user: { type: String, ref: "user"},
     isprivate : { type : Boolean, required: true},
     movies:  [{ movie_id: Number , title: String, poster_paths: String}]
 });
@@ -13,7 +13,7 @@ const playListSchema = new mongoose.Schema({
 const validate = (playList) => {
 	const schema = Joi.object({
 		name: Joi.string().required(),
-		user: Joi.string().required(),
+		user: Joi.string(),
         isprivate: Joi.boolean().required(),
         // movies : Joi.array().items(Joi.number()),
 	});

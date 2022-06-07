@@ -1,44 +1,98 @@
-import React, { useEffect, useState } from 'react';
-// import axios from '../../axios';
-import '../Row/Row.css';
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./DisplayList.css";
+import UpdateModal from "../UpdateModal";
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
 
-function DisplayList({ title , url, isLargeRow }) {
+function DisplayList({ title, id, url, playlists, setPlaylist, isprivate }) {
   const [movies, setMovies] = useState([]);
-  
+  const [error, setError] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const config = {
-    headers: { 'x-auth-token' :  localStorage.getItem('token') }
-};
+    headers: { "x-auth-token": localStorage.getItem("token") },
+  };
+
   useEffect(() => {
-    async function fetchData(){
-     const request = await axios.get(url, config);
-     setMovies(request.data);
-    //  return request;
-    } fetchData();
-    
+    async function fetchData() {
+      const request = await axios.get(url, config);
+      console.log(request.data);
+      setMovies(request.data.data);
+      //  return request;
+    }
+    fetchData();
   }, []);
 
-    return (
-        <div className="row" >
-           
-            <h2>{ title }</h2>
+  const handleDelete = (movieid) => {
+    const newMovies = movies.filter((movie) => movie.movie_id != movieid);
+    setMovies(newMovies);
+    const res = axios
+      .put(
+        "/playlists/remove-movie",
+        { playlistId: id, movieId: movieid },
+        config
+      )
+      .then((res) => {
+        alert("Deleted successfully!");
+      })
+      .catch((res) => {
+        alert("Unauthorised action");
+      });
+  };
+  // console.log(res.message);
 
-            <div className="row__posters" >
-
-              {movies.data?.map(movie =>(
-                <img 
-                key={movie}
-                // onClick={()=> handleClick(movie)}
-                className={"row__poster"}
-                src = {`https://image.tmdb.org/t/p/original/${movie.poster_paths}`}
-                alt={movie.title} 
-                />
-              ))}
+  const handleDeletePlaylist = () => {
+    const newPlaylist = playlists.filter((playlist) => playlist._id != id);
+    setPlaylist(newPlaylist);
+    const res = axios
+      .delete(`/playlists/${id}`, config)
+      .then((res) => {
+        alert("Playlist deleted successfully!");
+      })
+      .catch((res) => {
+        alert("Unauthorised action");
+      });
+  };
+  return (
+    <div className="row">
+      <h2>{title}</h2>
+      <button onClick={() => setModalIsOpen(true)}>Update</button>
+      <button onClick={handleDeletePlaylist}>Delete</button>
+      {modalIsOpen ? (
+        <UpdateModal
+          modalIsOpen={modalIsOpen}
+          setModalIsOpen={setModalIsOpen}
+          playlistId={id}
+          title={title}
+          isprivate={isprivate}
+        />
+      ) : (
+        ""
+      )}
+      <div className="row__posters">
+        {movies?.map((movie) => (
+          <div className="movie">
+            <img
+              key={movie}
+              className={"list__poster"}
+              src={`https://image.tmdb.org/t/p/original/${movie.poster_paths}`}
+              alt={movie.title}
+            />
+            <div className="movie-info">
+              <h4>{movie.title}</h4>
+              <button
+                onClick={() => {
+                  handleDelete(movie.movie_id);
+                }}
+              >
+                Delete
+              </button>
             </div>
-        </div>
-    )
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default DisplayList;

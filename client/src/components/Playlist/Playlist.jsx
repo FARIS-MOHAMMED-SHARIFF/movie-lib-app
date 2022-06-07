@@ -1,54 +1,150 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import Navbar from '../Navbar/Navbar.jsx';
-import DisplayList from './DisplayList.js';
-import "./Playlist.css"
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Navbar from "../Navbar/Navbar.jsx";
+import DisplayList from "./DisplayList.js";
+import "./Playlist.css";
+import Modal from "react-modal";
+import Switch from "../Switch/Switch.js";
 
+Modal.setAppElement("#root");
 const fetchUrl = "/playlists";
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+    colour: "#e50914",
+  },
+};
 
-const Playlist = () => {
-	
-	const [playlists, setPlaylist] = useState([]);
+const Playlist = ({ location, history }) => {
+  const [playlists, setPlaylist] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [error, setError] = useState("");
+  const [isToggled, setIsToggled] = useState(false);
+  // const [data, setData] = useState({ name: "", isprivate: isToggled });
+  const [myname, setMyName] = useState("");
 
-	useEffect(() => {
-		const config = {
-			headers: { 'x-auth-token' :  localStorage.getItem('token') }
-		};
+  useEffect(() => {
+    const fetchData = async () => {
+      const config = {
+        headers: { "x-auth-token": localStorage.getItem("token") },
+      };
+      axios
+        .get(fetchUrl, config)
+        .then((res) => {
+          console.log(res.data);
+          setPlaylist(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchData();
+  }, []);
 
-		axios.get(fetchUrl, config)
-		.then(res => {
-			console.log(res.data)
-			// console.log(res.data.name)
-			setPlaylist(res.data)
-		})
-		.catch(err => {
-			console.log(err)
-		})    
-  }, []); 
+  const configs = {
+    headers: { "x-auth-token": localStorage.getItem("token") },
+  };
+
+  const handleCreatePlaylistSubmit = async (e) => {
+    e.preventDefault();
+
+    setModalIsOpen(false);
+    try {
+      const { data: res } = await axios.post(
+        "/playlists",
+        {
+          name: myname,
+          isprivate: isToggled,
+        },
+        configs
+      );
+      // console.log(playlists);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+    window.location.reload();
+    // history.push("/playlists");
+  };
+
+  const handleChange = (e) => {
+    setMyName(e.target.value);
+  };
+
   return (
-	  <div>
-		  <Navbar />
-	  <div className="container">
-		  	<div className='cen_btn'>
-				<button className="playlist_btn">
-					Create Playlist
-				</button>
-		  	</div>
-			<div className="row" >
-				<div>
-					{playlists.map( playlist => (
-						<DisplayList title={playlist.name}   url={`/playlists/${playlist._id}`} />
-					))}
-				</div>
-			</div>
-		</div>
-						</div>
-  )
-}
+    <div>
+      <Navbar />
+      <div className="container">
+        <div className="cen_btn">
+          <button onClick={() => setModalIsOpen(true)} className="playlist_btn">
+            Create Playlist
+          </button>
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={() => setModalIsOpen(false)}
+            style={customStyles}
+          >
+            <form
+              className="form_container"
+              onSubmit={handleCreatePlaylistSubmit}
+            >
+              <h1>Create Playlist</h1>
+              <input
+                type="text"
+                placeholder="Name"
+                name="name"
+                onChange={handleChange}
+                required
+                className="input"
+              />
+              <Switch
+                isToggled={isToggled}
+                onToggle={() => {
+                  setIsToggled(!isToggled);
+                }}
+              />
+
+              {error && <div className="error_msg">{error}</div>}
+              <button type="submit" className="white_btn">
+                Create
+              </button>
+            </form>
+          </Modal>
+        </div>
+        <div className="row">
+          <div>
+            {playlists.map((playlist) => (
+              <DisplayList
+                title={playlist.name}
+                id={playlist._id}
+                url={`/playlists/${playlist._id}`}
+                playlists={playlists}
+                setPlaylist={setPlaylist}
+                isprivate={playlist.isprivate}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Playlist;
 
-{/* <div className = "movie-container"> */}
-        //  {movies.length > 0 && 
-            //   movies.map((movie) => <Movie key={movie.id} {...movie} />)}
-        // </div> */}
+// {
+/* <div className = "movie-container"> */
+// }
+//  {movies.length > 0 &&
+//   movies.map((movie) => <Movie key={movie.id} {...movie} />)}
+// </div> */}

@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CreatePlaylist = () => {
-  return (
-    <div>
-        CreatePlaylist
-    </div>
-  )
-}
+  return <div>CreatePlaylist</div>;
+};
 
-export default CreatePlaylist
+export default CreatePlaylist;
